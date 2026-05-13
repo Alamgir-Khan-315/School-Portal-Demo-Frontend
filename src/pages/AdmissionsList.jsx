@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { User, Calendar, GraduationCap, Phone, Clock, CheckCircle, Trash2, Loader } from 'lucide-react';
+import { BACKEND_URL } from '../config';
 
 const AdmissionsList = () => {
   const [admissions, setAdmissions] = useState([]);
@@ -16,7 +17,7 @@ const AdmissionsList = () => {
 
   const fetchAdmissions = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admissions/all');
+      const res = await axios.get(`${BACKEND_URL}/api/admissions/all`);
       setAdmissions(res.data);
     } catch (err) {
       setError('Failed to fetch admissions');
@@ -31,7 +32,7 @@ const AdmissionsList = () => {
     if (!window.confirm('Approve this admission? A student account will be created.')) return;
     setActionLoading(id + '_approve');
     try {
-      const res = await axios.patch(`http://localhost:5000/api/admissions/${id}/approve`);
+      const res = await axios.patch(`${BACKEND_URL}/api/admissions/${id}/approve`);
       showToast('success', res.data.message);
       fetchAdmissions(); // refresh list
     } catch (err) {
@@ -45,7 +46,7 @@ const AdmissionsList = () => {
     if (!window.confirm('Delete this admission query? This cannot be undone.')) return;
     setActionLoading(id + '_delete');
     try {
-      await axios.delete(`http://localhost:5000/api/admissions/${id}`);
+      await axios.delete(`${BACKEND_URL}/api/admissions/${id}`);
       showToast('success', 'Admission deleted successfully');
       setAdmissions((prev) => prev.filter((a) => a._id !== id));
     } catch (err) {

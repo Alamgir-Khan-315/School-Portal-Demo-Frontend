@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { BACKEND_URL } from '../config';
 const Admission = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -22,7 +22,7 @@ const Admission = () => {
     setLoading(true);
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/admissions/submit', formData);
+      const res = await axios.post(`${BACKEND_URL}/api/admissions/submit`, formData);
       setMessage(res.data.message);
       setFormData({
         firstName: '',

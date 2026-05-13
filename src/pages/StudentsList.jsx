@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { BACKEND_URL } from '../config';
 import { User, Hash, Calendar, Phone, UserCheck, Users } from 'lucide-react';
 
 const StudentsList = () => {
@@ -15,7 +16,7 @@ const StudentsList = () => {
         const config = {
           headers: { Authorization: `Bearer ${user.token}` },
         };
-        const res = await axios.get('http://localhost:5000/api/students', config);
+        const res = await axios.get(`${BACKEND_URL}/api/students`, config);
         setStudents(res.data);
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch students');
@@ -134,7 +135,7 @@ const StudentsList = () => {
                         onClick={async () => {
                           if (window.confirm('Delete this student and their account? This cannot be undone.')) {
                             try {
-                              await axios.delete(`http://localhost:5000/api/students/${student._id}`, {
+                              await axios.delete(`${BACKEND_URL}/api/students/${student._id}`, {
                                 headers: { Authorization: `Bearer ${user.token}` },
                               });
                               setStudents(prev => prev.filter(s => s._id !== student._id));

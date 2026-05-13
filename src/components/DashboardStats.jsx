@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { BACKEND_URL } from '../config';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -73,7 +74,7 @@ const DashboardStats = ({ role }) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.get('http://localhost:5000/api/stats', config);
+        const { data } = await axios.get(`${BACKEND_URL}/api/stats`, config);
         
         // Map icon strings to components if needed, or backend can just send title and we map here
         const mappedStats = data.stats.map(s => ({
