@@ -77,9 +77,9 @@ const DashboardStats = ({ role }) => {
         const { data } = await axios.get(`${BACKEND_URL}/api/stats`, config);
         
         // Map icon strings to components if needed, or backend can just send title and we map here
-        const mappedStats = data.stats.map(s => ({
+        const mappedStats = (data.stats || []).map(s => ({
           ...s,
-          icon: iconMap[s.icon] || (s.title.includes('Student') ? Users : s.title.includes('Teacher') ? UserSquare : s.title.includes('Revenue') ? DollarSign : s.title.includes('Class') ? BookOpen : s.title.includes('Attendance') ? Calendar : GraduationCap)
+          icon: iconMap[s.icon] || (s.title?.includes('Student') ? Users : s.title?.includes('Teacher') ? UserSquare : s.title?.includes('Revenue') ? DollarSign : s.title?.includes('Class') ? BookOpen : s.title?.includes('Attendance') ? Calendar : GraduationCap)
         }));
 
         setStats(mappedStats);

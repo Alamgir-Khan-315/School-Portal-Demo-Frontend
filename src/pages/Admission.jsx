@@ -98,10 +98,9 @@ const Admission = () => {
                 onChange={handleChange}
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
               >
-                <option>Grade 9</option>
-                <option>Grade 10</option>
-                <option>Grade 11</option>
-                <option>Grade 12</option>
+                {[...Array(12)].map((_, i) => (
+                  <option key={i+1}>{`Grade ${i+1}`}</option>
+                ))}
               </select>
             </div>
           </div>

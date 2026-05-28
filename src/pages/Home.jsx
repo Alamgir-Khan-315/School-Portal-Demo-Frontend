@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, Users, Trophy, ArrowRight, Star, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { BookOpen, Users, Trophy, ArrowRight, Star, ShieldCheck, Zap, Globe, ClipboardCheck, FileText } from 'lucide-react';
 import heroImg from '../assets/hero.png';
 
 const Home = () => {
@@ -197,6 +197,78 @@ const Home = () => {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Portal Services Section */}
+      <section className="py-24 bg-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-mesh opacity-20"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <motion.span 
+              className="text-indigo-400 font-bold tracking-widest uppercase text-sm"
+              {...fadeInUp}
+            >
+              Digital Campus
+            </motion.span>
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6"
+              {...fadeInUp}
+            >
+              Premium Portal Services
+            </motion.h2>
+            <motion.p 
+              className="text-slate-400 max-w-2xl mx-auto text-lg"
+              {...fadeInUp}
+            >
+              Experience seamless academic management with our integrated suite of digital services designed for students, teachers, and parents.
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <ClipboardCheck />,
+                title: "Smart Attendance",
+                desc: "Real-time attendance tracking with instant notifications and visual analytics for parents and students.",
+                color: "from-green-500 to-emerald-700"
+              },
+              {
+                icon: <FileText />,
+                title: "Notes Sharing",
+                desc: "Teachers can easily upload and distribute study materials, assignments, and important lecture notes.",
+                color: "from-blue-500 to-indigo-700"
+              },
+              {
+                icon: <Trophy />,
+                title: "Digital Results",
+                desc: "Instant access to exam results, performance graphs, and historical academic records.",
+                color: "from-purple-500 to-pink-700"
+              },
+              {
+                icon: <Globe />,
+                title: "Communication",
+                desc: "Direct messaging channels between teachers and students for doubt clearing and mentorship.",
+                color: "from-orange-500 to-red-700"
+              }
+            ].map((service, idx) => (
+              <motion.div 
+                key={idx}
+                variants={fadeInUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card-dark p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 group"
+              >
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-6 bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform`}>
+                  {React.cloneElement(service.icon, { size: 24 })}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{service.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
